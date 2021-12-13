@@ -12,12 +12,14 @@ class CosmologyCalculatorScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cosmology'),
       ),
-      body: Column(
-        children: const [
-          InputForms(),
-          Divider(),
-          OutputResults(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            InputForms(),
+            Divider(),
+            OutputResults(),
+          ],
+        ),
       ),
     );
   }
