@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/input_forms.dart';
 import '../widgets/output_results.dart';
+import '../widgets/select_universe.dart';
 
 class CosmologyCalculatorScreen extends StatelessWidget {
   const CosmologyCalculatorScreen({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class CosmologyCalculatorScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: const [
+            SelectUniverse(),
+            Divider(),
             InputForms(),
             Divider(),
             OutputResults(),

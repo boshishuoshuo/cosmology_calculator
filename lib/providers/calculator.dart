@@ -2,10 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../models/universe.dart';
+
 class Calculator with ChangeNotifier {
   final double Tyr = 977.8; //coefficent for converting 1/H into Gyr
   final double c = 299792.458; // velocity of light in km/sec
   final int n = 1000;
+  Universe selectedModel = Universe.flat;
 
   Map<String, double?> _results = {
     'z': 3.0,
@@ -112,14 +115,15 @@ class Calculator with ChangeNotifier {
     return _DA / (_az * _az);
   }
 
-  void calculate({
-    double? zInput,
-    double? h0Input,
-    double? wmInput,
-  }) {
-    _results['z'] = zInput!;
-    _results['H0'] = h0Input;
-    _results['WM'] = wmInput;
+  void selectUniverse(Universe selectedUniverse) {
+    selectedModel = selectedUniverse;
+    notifyListeners();
+  }
+
+  void calculate(Map<String, double?> inputValues) {
+    _results['z'] = inputValues['redshift'];
+    _results['H0'] = inputValues['hubbleConst'];
+    _results['WM'] = inputValues['omegaMatter'];
     double age = _age;
     double zage = _zage;
 

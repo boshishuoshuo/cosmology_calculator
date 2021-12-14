@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/calculator.dart';
+import '../models/universe.dart';
 
 class InputForms extends StatefulWidget {
   const InputForms({Key? key}) : super(key: key);
@@ -20,8 +21,8 @@ class _InputFormsState extends State<InputForms> {
 
   Map<String, double> _inputValue = {
     'redshift': 0.0,
-    'hubbleConst': 0.0,
-    'omegaMatter': 0.0,
+    'hubbleConst': 75.0,
+    'omegaMatter': 3.0,
   };
 
   void _saveForm() {
@@ -32,16 +33,15 @@ class _InputFormsState extends State<InputForms> {
     _form.currentState!.save();
     final calculator = Provider.of<Calculator>(context, listen: false);
     calculator.calculate(
-      zInput: _inputValue['redshift']!,
-      h0Input: _inputValue['hubbleConst']!,
-      wmInput: _inputValue['omegaMatter']!,
+      _inputValue,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final calculator = Provider.of<Calculator>(context);
     return Container(
-      height: 200,
+      height: 350,
       padding: const EdgeInsets.all(16.0),
       child: Form(
         key: _form,
@@ -74,37 +74,11 @@ class _InputFormsState extends State<InputForms> {
               },
             ),
             TextFormField(
-              initialValue: _initValue['omegaMatter'].toString(),
-              decoration: const InputDecoration(
-                labelText: 'Omega Matter',
-              ),
-              textInputAction: TextInputAction.next,
-              // onFieldSubmitted: (_) {
-              //   FocusScope.of(context).requestFocus(_priceFocusNode);
-              // },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please provide a value'; // treat input as wrong input and show it to the user
-                }
-                if (double.tryParse(value) == null) {
-                  return 'Please enter only number.';
-                }
-                if (double.parse(value) < 0 || double.parse(value) >= 1.0) {
-                  return 'Please provide a value in (0, 1)';
-                }
-                return null; // treat input as right
-              },
-              keyboardType: TextInputType.number,
-              onSaved: (value) {
-                _inputValue['omegaMatter'] = double.parse(value!);
-              },
-            ),
-            TextFormField(
               initialValue: _initValue['redshift'].toString(),
               decoration: const InputDecoration(
                 labelText: 'Redshift',
               ),
-              textInputAction: TextInputAction.done,
+              textInputAction: TextInputAction.next,
               // onFieldSubmitted: (_) {
               //   FocusScope.of(context).requestFocus(_priceFocusNode);
               // },
@@ -125,6 +99,60 @@ class _InputFormsState extends State<InputForms> {
                 _inputValue['redshift'] = double.parse(value!);
               },
             ),
+            if (calculator.selectedModel != Universe.flat)
+              TextFormField(
+                initialValue: _initValue['omegaMatter'].toString(),
+                decoration: const InputDecoration(
+                  labelText: 'Omega Matter',
+                ),
+                textInputAction: TextInputAction.next,
+                // onFieldSubmitted: (_) {
+                //   FocusScope.of(context).requestFocus(_priceFocusNode);
+                // },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please provide a value'; // treat input as wrong input and show it to the user
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'Please enter only number.';
+                  }
+                  if (double.parse(value) < 0 || double.parse(value) >= 1.0) {
+                    return 'Please provide a value in (0, 1)';
+                  }
+                  return null; // treat input as right
+                },
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  _inputValue['omegaMatter'] = double.parse(value!);
+                },
+              ),
+            if (calculator.selectedModel == Universe.general)
+              TextFormField(
+                initialValue: _initValue['omegaVacuum'].toString(),
+                decoration: const InputDecoration(
+                  labelText: 'Omega Vacuum',
+                ),
+                textInputAction: TextInputAction.done,
+                // onFieldSubmitted: (_) {
+                //   FocusScope.of(context).requestFocus(_priceFocusNode);
+                // },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please provide a value'; // treat input as wrong input and show it to the user
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'Please enter only number.';
+                  }
+                  if (double.parse(value) < 0 || double.parse(value) >= 1.0) {
+                    return 'Please provide a value in (0, 1)';
+                  }
+                  return null; // treat input as right
+                },
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  _inputValue['omegaVacuum'] = double.parse(value!);
+                },
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
