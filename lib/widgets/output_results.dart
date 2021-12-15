@@ -25,7 +25,7 @@ class OutputResults extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -45,6 +45,7 @@ class OutputResults extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 6),
                     Tooltip(
                       message: 'angular size distance',
                       child: EasyRichText(
@@ -58,6 +59,7 @@ class OutputResults extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 6),
                     Tooltip(
                       message: 'the age at redshift z',
                       child: EasyRichText(
@@ -81,8 +83,10 @@ class OutputResults extends StatelessWidget {
                   children: [
                     Text(
                         '${calculator.results['DL_Mpc']!.toStringAsFixed(1)} Mpc / ${calculator.results['DL_Gyr']!.toStringAsFixed(3)} Gly'),
+                    const SizedBox(height: 6),
                     Text(
                         '${calculator.results['DA_Mpc']!.toStringAsFixed(1)} Mpc / ${calculator.results['DA_Gyr']!.toStringAsFixed(4)} Gly'),
+                    const SizedBox(height: 6),
                     Text(
                         '${calculator.results['zage_Gyr']!.toStringAsFixed(3)} Gyr'),
                   ],

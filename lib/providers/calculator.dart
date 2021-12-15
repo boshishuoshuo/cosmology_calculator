@@ -14,17 +14,18 @@ class Calculator with ChangeNotifier {
     'z': 3.0,
     'H0': 75,
     'OmegaM': 0.3,
+    'OmegaV': 0.0,
     'age_Gyr': 0.0,
-    'zage_Gyr': 0.0,
+    'zage_Gyr': 1.969,
     'DTT_Gyr': 0.0,
     'DCMR_Mpc': 0.0,
     'DCMR_Gyr': 0.0,
     'V_Gpc': 0.0,
-    'DA_Mpc': 0.0,
-    'DA_Gyr': 0.0,
+    'DA_Mpc': 1482.7,
+    'DA_Gyr': 4.8360,
     'kpc_DA': 0.0,
-    'DL_Mpc': 0.0,
-    'DL_Gyr': 0.0,
+    'DL_Mpc': 23723.4,
+    'DL_Gyr': 77.376,
     'distanceModulus': 0.0,
   };
 
@@ -37,9 +38,22 @@ class Calculator with ChangeNotifier {
   }
 
   double get _WV {
-    return 1.0 -
-        _results['OmegaM']! -
-        0.4165 / (_results['H0']! * _results['H0']!);
+    switch (selectedModel) {
+      case Universe.flat:
+        {
+          return 1.0 -
+              _results['OmegaM']! -
+              0.4165 / (_results['H0']! * _results['H0']!);
+        }
+      case Universe.open:
+        {
+          return 0.0;
+        }
+      case Universe.general:
+        {
+          return _results['OmegaV']!;
+        }
+    }
   }
 
   double get _h {
@@ -123,10 +137,10 @@ class Calculator with ChangeNotifier {
   void calculate(Map<String, double?> inputValues) {
     _results['z'] = inputValues['redshift'];
     _results['H0'] = inputValues['hubbleConst'];
-    _results['WM'] = inputValues['omegaMatter'];
+    _results['OmegaM'] = inputValues['omegaMatter'];
+    _results['OmegaV'] = inputValues['omegaVacuum'];
     double age = _age;
     double zage = _zage;
-
     double DTT = _DTT;
     double DCMR = _DCMR;
     age = DTT + zage;

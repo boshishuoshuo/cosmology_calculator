@@ -21,6 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'Cosmology Calculator',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: const TextTheme(
+          headline6: TextStyle(fontSize: 22),
+          bodyText2: TextStyle(fontSize: 18),
+        ),
       ),
       home: const CosmologyCalculatorScreen(),
     );

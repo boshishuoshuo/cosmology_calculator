@@ -31,17 +31,18 @@ class _SelectUniverseState extends State<SelectUniverse> {
             height: 10,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
                 onPressed: () {
                   return calculator.selectUniverse(Universe.flat);
                 },
-                child: Text('Flat'),
+                child: const Text('Flat'),
                 style: ElevatedButton.styleFrom(
                   primary: calculator.selectedModel == Universe.flat
                       ? Theme.of(context).primaryColor
                       : Colors.grey,
+                  textStyle: TextStyle(fontSize: 16),
                 ),
               ),
               ElevatedButton(
@@ -53,6 +54,7 @@ class _SelectUniverseState extends State<SelectUniverse> {
                   primary: calculator.selectedModel == Universe.open
                       ? Theme.of(context).primaryColor
                       : Colors.grey,
+                  textStyle: TextStyle(fontSize: 16),
                 ),
               ),
               ElevatedButton(
@@ -64,6 +66,7 @@ class _SelectUniverseState extends State<SelectUniverse> {
                   primary: calculator.selectedModel == Universe.general
                       ? Theme.of(context).primaryColor
                       : Colors.grey,
+                  textStyle: TextStyle(fontSize: 16),
                 ),
               ),
             ],
