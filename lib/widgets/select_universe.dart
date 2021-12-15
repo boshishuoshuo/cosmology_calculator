@@ -15,43 +15,61 @@ class _SelectUniverseState extends State<SelectUniverse> {
   @override
   Widget build(BuildContext context) {
     final calculator = Provider.of<Calculator>(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            return calculator.selectUniverse(Universe.flat);
-          },
-          child: Text('Flat'),
-          style: ElevatedButton.styleFrom(
-            primary: calculator.selectedModel == Universe.flat
-                ? Theme.of(context).primaryColor
-                : Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'MODELS',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            return calculator.selectUniverse(Universe.open);
-          },
-          child: Text('Open'),
-          style: ElevatedButton.styleFrom(
-            primary: calculator.selectedModel == Universe.open
-                ? Theme.of(context).primaryColor
-                : Colors.grey,
+          const SizedBox(
+            height: 10,
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            return calculator.selectUniverse(Universe.general);
-          },
-          child: Text('General'),
-          style: ElevatedButton.styleFrom(
-            primary: calculator.selectedModel == Universe.general
-                ? Theme.of(context).primaryColor
-                : Colors.grey,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  return calculator.selectUniverse(Universe.flat);
+                },
+                child: Text('Flat'),
+                style: ElevatedButton.styleFrom(
+                  primary: calculator.selectedModel == Universe.flat
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  return calculator.selectUniverse(Universe.open);
+                },
+                child: Text('Open'),
+                style: ElevatedButton.styleFrom(
+                  primary: calculator.selectedModel == Universe.open
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  return calculator.selectUniverse(Universe.general);
+                },
+                child: Text('General'),
+                style: ElevatedButton.styleFrom(
+                  primary: calculator.selectedModel == Universe.general
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey,
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
