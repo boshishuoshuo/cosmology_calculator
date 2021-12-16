@@ -330,11 +330,9 @@ class _InputFormsState extends State<InputForms> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ElevatedButton(
-                    onPressed: _saveForm,
-                    child: const Text('Submit'),
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 16),
-                    )),
+                  onPressed: _saveForm,
+                  child: const Text('Submit'),
+                ),
               ],
             ),
           ],
