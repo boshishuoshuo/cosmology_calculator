@@ -42,31 +42,31 @@ class _SelectUniverseState extends State<SelectUniverse> {
                   primary: calculator.selectedModel == Universe.flat
                       ? Theme.of(context).primaryColor
                       : Colors.grey,
-                  textStyle: TextStyle(fontSize: 16),
+                  textStyle: const TextStyle(fontSize: 16),
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
                   return calculator.selectUniverse(Universe.open);
                 },
-                child: Text('Open'),
+                child: const Text('Open'),
                 style: ElevatedButton.styleFrom(
                   primary: calculator.selectedModel == Universe.open
                       ? Theme.of(context).primaryColor
                       : Colors.grey,
-                  textStyle: TextStyle(fontSize: 16),
+                  textStyle: const TextStyle(fontSize: 16),
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
                   return calculator.selectUniverse(Universe.general);
                 },
-                child: Text('General'),
+                child: const Text('General'),
                 style: ElevatedButton.styleFrom(
                   primary: calculator.selectedModel == Universe.general
                       ? Theme.of(context).primaryColor
                       : Colors.grey,
-                  textStyle: TextStyle(fontSize: 16),
+                  textStyle: const TextStyle(fontSize: 16),
                 ),
               ),
             ],

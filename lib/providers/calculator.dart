@@ -10,7 +10,7 @@ class Calculator with ChangeNotifier {
   final int n = 1000;
   Universe selectedModel = Universe.flat;
 
-  Map<String, double?> _results = {
+  final Map<String, double?> _results = {
     'z': 3.0,
     'H0': 75,
     'OmegaM': 0.3,

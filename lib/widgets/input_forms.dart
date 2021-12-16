@@ -23,7 +23,7 @@ class _InputFormsState extends State<InputForms> {
     'omegaVacuum': 0.0,
   };
 
-  Map<String, double> _inputValue = {
+  final Map<String, double> _inputValue = {
     'redshift': 0.0,
     'hubbleConst': 75.0,
     'omegaMatter': 0.3,
@@ -270,7 +270,7 @@ class _InputFormsState extends State<InputForms> {
                                       patternList: [
                                         EasyRichTextPattern(
                                           targetString:
-                                              '${String.fromCharCode(Lambda)}',
+                                              String.fromCharCode(Lambda),
                                           subScript: true,
                                           matchWordBoundaries: false,
                                         ),
