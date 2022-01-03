@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Cosmology Calculator',
       theme: ThemeData(
+        brightness: Brightness.light, // default
         primarySwatch: createMaterialColor(const Color(0xFF46cad1)),
         textTheme: const TextTheme(
           headline6: TextStyle(fontSize: 22),
@@ -47,8 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 16),
-              onPrimary: Colors.white),
+            textStyle: const TextStyle(fontSize: 16),
+            onPrimary: Colors.white,
+          ),
         ),
       ),
       home: const CosmologyCalculatorScreen(),
