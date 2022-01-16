@@ -134,11 +134,14 @@ class Calculator with ChangeNotifier {
     notifyListeners();
   }
 
-  void calculate(Map<String, double?> inputValues) {
-    _results['z'] = inputValues['redshift'];
+  void setParameter(Map<String, double?> inputValues) {
     _results['H0'] = inputValues['hubbleConst'];
     _results['OmegaM'] = inputValues['omegaMatter'];
     _results['OmegaV'] = inputValues['omegaVacuum'];
+  }
+
+  void calculate(double redshiftInputValue) {
+    _results['z'] = redshiftInputValue;
     double age = _age;
     double zage = _zage;
     double DTT = _DTT;
