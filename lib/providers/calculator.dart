@@ -8,7 +8,7 @@ class Calculator with ChangeNotifier {
   final double Tyr = 977.8; //coefficent for converting 1/H into Gyr
   final double c = 299792.458; // velocity of light in km/sec
   final int n = 1000;
-  Universe selectedModel = Universe.flat;
+  Universe selectedModel = Universe.general;
 
   final Map<String, double?> _results = {
     'z': 3.0,
