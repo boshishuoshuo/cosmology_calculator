@@ -83,6 +83,7 @@ class _InputFormsState extends State<InputForms> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        key: const Key('hubbleConst'),
                         style: const TextStyle(fontSize: 20),
                         initialValue: _initValue['hubbleConst'].toString(),
                         decoration: const InputDecoration(
