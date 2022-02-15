@@ -33,8 +33,8 @@ class Calculator with ChangeNotifier {
     return {..._results};
   }
 
-  double get _az {
-    return 1.0 / (1 + 1.0 * _results['z']!);
+  double _az(double redshiftZ) {
+    return 1.0 / (1 + 1.0 * redshiftZ);
   }
 
   double get _WV {
@@ -73,15 +73,19 @@ class Calculator with ChangeNotifier {
   }
 
   double get _zage {
-    return _az * _age / n;
+    return _az(_results['z']!) * _age / n;
   }
 
   double get _DTT {
-    return (1.0 - _az) * _integralDTTDCMR()['DTT']! / n;
+    return (1.0 - _az(_results['z']!)) *
+        _integralDTTDCMR(azVal: _az(_results['z']!))['DTT']! /
+        n;
   }
 
   double get _DCMR {
-    return (1.0 - _az) * _integralDTTDCMR()['DCMR']! / n;
+    return (1.0 - _az(_results['z']!)) *
+        _integralDTTDCMR(azVal: _az(_results['z']!))['DCMR']! /
+        n;
   }
 
   double get _V_Gpc {
@@ -122,11 +126,11 @@ class Calculator with ChangeNotifier {
       ratio = 1.0 + y / 6.0 + y * y / 120.0;
     }
     double DCMT = ratio * _DCMR;
-    return _az * DCMT;
+    return _az(_results['z']!) * DCMT;
   }
 
   double get _DL {
-    return _DA / (_az * _az);
+    return _DA / (_az(_results['z']!) * _az(_results['z']!));
   }
 
   void selectUniverse(Universe selectedUniverse) {
@@ -175,10 +179,10 @@ class Calculator with ChangeNotifier {
 
   Map<String, double> _integralDTTDCMR({
     int n = 1000,
+    required double azVal,
   }) {
     double DTT = 0.0;
     double DCMR = 0.0;
-    final double azVal = _az;
     final double WMVal = _results['OmegaM']!;
     final double WVVal = _WV;
     final double WRVal = _WR;
@@ -198,7 +202,7 @@ class Calculator with ChangeNotifier {
     int n = 1000,
   }) {
     double age = 0;
-    final double azVal = _az;
+    final double azVal = _az(_results['z']!);
     final double WMVal = _results['OmegaM']!;
     final double WVVal = _WV;
     final double WRVal = _WR;
