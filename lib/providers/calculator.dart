@@ -12,6 +12,8 @@ class Calculator with ChangeNotifier {
 
   final Map<String, double?> _results = {
     'z': 3.0,
+    'z2': 3.5,
+    'mass': 10000000000.0,
     'H0': 75,
     'OmegaM': 0.3,
     'OmegaV': 0.0,
@@ -144,8 +146,11 @@ class Calculator with ChangeNotifier {
     _results['OmegaV'] = inputValues['omegaVacuum'];
   }
 
-  void calculate(double redshiftInputValue) {
+  void calculate(double redshiftInputValue, double redshiftInputValue2,
+      double massInputValue) {
     _results['z'] = redshiftInputValue;
+    _results['z2'] = redshiftInputValue2;
+    _results['mass'] = massInputValue;
     double age = _age;
     double zage = _zage;
     double DTT = _DTT;

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 
 import '../providers/calculator.dart';
-import '../models/universe.dart';
 
 class InputForms extends StatefulWidget {
   const InputForms({Key? key}) : super(key: key);
@@ -29,8 +28,12 @@ class _InputFormsState extends State<InputForms> {
   };
 
   final double _redshiftInitValue = 3.0;
+  final double _redshiftInitValue2 = 3.5;
+  final double _massInitValue = 10000000000.0;
 
   double _redshiftInputValue = 0.0;
+  double _redshiftInputValue2 = 0.0;
+  double _massInputValue = 0.0;
 
   void _saveForm() {
     final isValid = _form.currentState!.validate();
@@ -44,6 +47,8 @@ class _InputFormsState extends State<InputForms> {
     );
     calculator.calculate(
       _redshiftInputValue,
+      _redshiftInputValue2,
+      _massInputValue,
     );
   }
 
@@ -58,7 +63,6 @@ class _InputFormsState extends State<InputForms> {
           children: [
             Container(
               height: 75,
-              width: 300,
               alignment: Alignment.center,
               child: Row(
                 children: [
@@ -119,7 +123,6 @@ class _InputFormsState extends State<InputForms> {
             const SizedBox(height: 14),
             Container(
               height: 75,
-              width: 300,
               alignment: Alignment.center,
               child: Row(
                 children: [
@@ -179,7 +182,6 @@ class _InputFormsState extends State<InputForms> {
             const SizedBox(height: 14),
             Container(
               height: 75,
-              width: 300,
               alignment: Alignment.center,
               child: Row(
                 children: [
@@ -244,7 +246,6 @@ class _InputFormsState extends State<InputForms> {
             const SizedBox(height: 14),
             Container(
               height: 75,
-              width: 300,
               alignment: Alignment.center,
               child: Row(
                 children: [
@@ -303,7 +304,6 @@ class _InputFormsState extends State<InputForms> {
             const SizedBox(height: 14),
             Container(
               height: 75,
-              width: 300,
               alignment: Alignment.center,
               child: Row(
                 children: [
@@ -328,7 +328,7 @@ class _InputFormsState extends State<InputForms> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
                         style: const TextStyle(fontSize: 20),
-                        initialValue: _redshiftInitValue.toString(),
+                        initialValue: _redshiftInitValue2.toString(),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -343,15 +343,14 @@ class _InputFormsState extends State<InputForms> {
                           if (double.tryParse(value) == null) {
                             return 'Please enter only number.';
                           }
-                          if (double.parse(value) < 0 ||
-                              double.parse(value) >= 100) {
-                            return 'Please provide a value in (0, 100)';
+                          if (double.parse(value) < _redshiftInputValue) {
+                            return 'Please provide a value larger than z1';
                           }
                           return null; // treat input as right
                         },
                         keyboardType: TextInputType.number,
                         onSaved: (value) {
-                          _redshiftInputValue = double.parse(value!);
+                          _redshiftInputValue2 = double.parse(value!);
                         },
                       ),
                     ),
@@ -367,7 +366,6 @@ class _InputFormsState extends State<InputForms> {
             const SizedBox(height: 14),
             Container(
               height: 75,
-              width: 300,
               alignment: Alignment.center,
               child: Row(
                 children: [
@@ -383,7 +381,7 @@ class _InputFormsState extends State<InputForms> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
                         style: const TextStyle(fontSize: 20),
-                        initialValue: _redshiftInitValue.toString(),
+                        initialValue: _massInitValue.toString(),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -398,15 +396,15 @@ class _InputFormsState extends State<InputForms> {
                           if (double.tryParse(value) == null) {
                             return 'Please enter only number.';
                           }
-                          if (double.parse(value) < 0 ||
-                              double.parse(value) >= 100) {
-                            return 'Please provide a value in (0, 100)';
+                          if (double.parse(value) < 1 ||
+                              double.parse(value) >= 1000000000000000) {
+                            return 'Please provide a value in (1, 1e15)';
                           }
                           return null; // treat input as right
                         },
                         keyboardType: TextInputType.number,
                         onSaved: (value) {
-                          _redshiftInputValue = double.parse(value!);
+                          _massInputValue = double.parse(value!);
                         },
                       ),
                     ),
