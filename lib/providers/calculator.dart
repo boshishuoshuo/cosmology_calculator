@@ -113,9 +113,9 @@ class Calculator with ChangeNotifier {
     return 4.0 * pi * (pow(0.001 * c / _results['H0']!, 3)) * VCM;
   }
 
-  double get _DA {
+  double _DA(double azVal) {
     double ratio;
-    double x = sqrt(_WK.abs()) * _DCMR(_az(_results['z']!));
+    double x = sqrt(_WK.abs()) * _DCMR(azVal);
     if (x > 0.1) {
       if (_WK > 0) {
         ratio = 0.5 * (exp(x) - exp(-x)) / x;
@@ -129,12 +129,13 @@ class Calculator with ChangeNotifier {
       }
       ratio = 1.0 + y / 6.0 + y * y / 120.0;
     }
-    double DCMT = ratio * _DCMR(_az(_results['z']!));
-    return _az(_results['z']!) * DCMT;
+    double DCMT = ratio * _DCMR(azVal);
+    return azVal * DCMT;
   }
 
   double get _DL {
-    return _DA / (_az(_results['z']!) * _az(_results['z']!));
+    return _DA(_az(_results['z']!)) /
+        (_az(_results['z']!) * _az(_results['z']!));
   }
 
   void selectUniverse(Universe selectedUniverse) {
@@ -163,8 +164,8 @@ class Calculator with ChangeNotifier {
     double DTT_Gyr = (Tyr / _results['H0']!) * DTT;
     double DCMR_Gyr = (Tyr / _results['H0']!) * DCMR;
     double DCMR_Mpc = (c / _results['H0']!) * DCMR;
-    double DA_Mpc = (c / _results['H0']!) * _DA;
-    double DA_Gyr = (Tyr / _results['H0']!) * _DA;
+    double DA_Mpc = (c / _results['H0']!) * _DA(_az(_results['z']!));
+    double DA_Gyr = (Tyr / _results['H0']!) * _DA(_az(_results['z']!));
     double kpc_DA = DA_Mpc / 206.264806;
     double DL_Mpc = (c / _results['H0']!) * _DL;
     double DL_Gyr = (Tyr / _results['H0']!) * _DL;
