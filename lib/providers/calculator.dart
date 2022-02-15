@@ -29,6 +29,7 @@ class Calculator with ChangeNotifier {
     'DL_Mpc': 23723.4,
     'DL_Gyr': 77.376,
     'distanceModulus': 0.0,
+    'thetaE': 0.0,
   };
 
   Map<String, double?> get results {
@@ -165,6 +166,13 @@ class Calculator with ChangeNotifier {
     double DCMR_Gyr = (Tyr / _results['H0']!) * DCMR;
     double DCMR_Mpc = (c / _results['H0']!) * DCMR;
     double DA_Mpc = (c / _results['H0']!) * _DA(_az(_results['z']!));
+    double DA_Mpc2 = (c / _results['H0']!) * _DA(_az(_results['z2']!));
+    double ds2s = (DA_Mpc2 - DA_Mpc) / DA_Mpc2;
+    double thetaE = sqrt(_results['mass']! * 4.0 * 6.67 * 2.0 / (9 * 3.09)) *
+        ds2s /
+        DA_Mpc *
+        1e-19;
+    thetaE = thetaE * 2.06e5;
     double DA_Gyr = (Tyr / _results['H0']!) * _DA(_az(_results['z']!));
     double kpc_DA = DA_Mpc / 206.264806;
     double DL_Mpc = (c / _results['H0']!) * _DL;
@@ -182,6 +190,7 @@ class Calculator with ChangeNotifier {
     _results['DL_Mpc'] = DL_Mpc;
     _results['DL_Gyr'] = DL_Gyr;
     _results['distanceModulus'] = distanceModulus;
+    _results['thetaE'] = thetaE;
     notifyListeners();
   }
 
