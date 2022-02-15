@@ -84,15 +84,13 @@ class Calculator with ChangeNotifier {
         n;
   }
 
-  double get _DCMR {
-    return (1.0 - _az(_results['z']!)) *
-        _integralDTTDCMR(azVal: _az(_results['z']!))['DCMR']! /
-        n;
+  double _DCMR(_azVal) {
+    return (1.0 - _azVal) * _integralDTTDCMR(azVal: _azVal)['DCMR']! / n;
   }
 
   double get _V_Gpc {
     double ratio;
-    double x = sqrt(_WK.abs()) * _DCMR;
+    double x = sqrt(_WK.abs()) * _DCMR(_az(_results['z']!));
     if (x > 0.1) {
       if (_WK > 0) {
         ratio = (0.125 * (exp(2.0 * x) - exp(-2.0 * x)) - x / 2.0) /
@@ -107,13 +105,17 @@ class Calculator with ChangeNotifier {
       }
       ratio = 1.0 + y / 5.0 + (2.0 / 105.0) * y * y;
     }
-    double VCM = ratio * _DCMR * _DCMR * _DCMR / 3.0;
+    double VCM = ratio *
+        _DCMR(_az(_results['z']!)) *
+        _DCMR(_az(_results['z']!)) *
+        _DCMR(_az(_results['z']!)) /
+        3.0;
     return 4.0 * pi * (pow(0.001 * c / _results['H0']!, 3)) * VCM;
   }
 
   double get _DA {
     double ratio;
-    double x = sqrt(_WK.abs()) * _DCMR;
+    double x = sqrt(_WK.abs()) * _DCMR(_az(_results['z']!));
     if (x > 0.1) {
       if (_WK > 0) {
         ratio = 0.5 * (exp(x) - exp(-x)) / x;
@@ -127,7 +129,7 @@ class Calculator with ChangeNotifier {
       }
       ratio = 1.0 + y / 6.0 + y * y / 120.0;
     }
-    double DCMT = ratio * _DCMR;
+    double DCMT = ratio * _DCMR(_az(_results['z']!));
     return _az(_results['z']!) * DCMT;
   }
 
@@ -154,7 +156,7 @@ class Calculator with ChangeNotifier {
     double age = _age;
     double zage = _zage;
     double DTT = _DTT;
-    double DCMR = _DCMR;
+    double DCMR = _DCMR(_az(_results['z']!));
     age = DTT + zage;
     double age_Gyr = age * (Tyr / _results['H0']!);
     double zage_Gyr = (Tyr / _results['H0']!) * zage;
