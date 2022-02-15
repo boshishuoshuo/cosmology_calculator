@@ -251,8 +251,133 @@ class _InputFormsState extends State<InputForms> {
                   Container(
                       alignment: Alignment.centerRight,
                       width: 40,
+                      child: Tooltip(
+                        message: 'redshift 1',
+                        child: EasyRichText(
+                          'z1 :',
+                          patternList: [
+                            EasyRichTextPattern(
+                              targetString: '1',
+                              subScript: true,
+                              matchWordBoundaries: false,
+                            ),
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        style: const TextStyle(fontSize: 20),
+                        initialValue: _redshiftInitValue.toString(),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                            width: 1.0,
+                          )),
+                        ),
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please provide a value'; // treat input as wrong input and show it to the user
+                          }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter only number.';
+                          }
+                          if (double.parse(value) < 0 ||
+                              double.parse(value) >= 100) {
+                            return 'Please provide a value in (0, 100)';
+                          }
+                          return null; // treat input as right
+                        },
+                        keyboardType: TextInputType.number,
+                        onSaved: (value) {
+                          _redshiftInputValue = double.parse(value!);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 14),
+            Container(
+              height: 75,
+              width: 300,
+              alignment: Alignment.center,
+              child: Row(
+                children: [
+                  Container(
+                      alignment: Alignment.centerRight,
+                      width: 40,
+                      child: Tooltip(
+                        message: 'redshift 2',
+                        child: EasyRichText(
+                          'z2 :',
+                          patternList: [
+                            EasyRichTextPattern(
+                              targetString: '2',
+                              subScript: true,
+                              matchWordBoundaries: false,
+                            ),
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        style: const TextStyle(fontSize: 20),
+                        initialValue: _redshiftInitValue.toString(),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                            width: 1.0,
+                          )),
+                        ),
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please provide a value'; // treat input as wrong input and show it to the user
+                          }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter only number.';
+                          }
+                          if (double.parse(value) < 0 ||
+                              double.parse(value) >= 100) {
+                            return 'Please provide a value in (0, 100)';
+                          }
+                          return null; // treat input as right
+                        },
+                        keyboardType: TextInputType.number,
+                        onSaved: (value) {
+                          _redshiftInputValue = double.parse(value!);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 14),
+            const Text(
+              'lens mass',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 14),
+            Container(
+              height: 75,
+              width: 300,
+              alignment: Alignment.center,
+              child: Row(
+                children: [
+                  Container(
+                      alignment: Alignment.centerRight,
+                      width: 60,
                       child: const Tooltip(
-                          message: 'redshift', child: Text('z :'))),
+                        message: 'lens mass',
+                        child: Text('mass :'),
+                      )),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
