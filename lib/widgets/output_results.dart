@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:charcode/charcode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
+import "package:charcode/ascii.dart";
 
 import '../providers/calculator.dart';
 
@@ -73,6 +75,20 @@ class OutputResults extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 6),
+                    Tooltip(
+                      message: 'Einstein radius',
+                      child: EasyRichText(
+                        '${String.fromCharCode($Theta)}E :',
+                        patternList: [
+                          EasyRichTextPattern(
+                            targetString: 'E',
+                            subScript: true,
+                            matchWordBoundaries: false,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -89,6 +105,9 @@ class OutputResults extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                         '${calculator.results['zage_Gyr']!.toStringAsFixed(3)} Gyr'),
+                    const SizedBox(height: 6),
+                    Text(
+                        '${calculator.results['thetaE']!.toStringAsFixed(3)} arcsec'),
                   ],
                 ),
               ),

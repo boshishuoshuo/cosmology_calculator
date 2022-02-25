@@ -168,10 +168,15 @@ class Calculator with ChangeNotifier {
     double DA_Mpc = (c / _results['H0']!) * _DA(_az(_results['z']!));
     double DA_Mpc2 = (c / _results['H0']!) * _DA(_az(_results['z2']!));
     double ds2s = (DA_Mpc2 - DA_Mpc) / DA_Mpc2;
-    double thetaE = sqrt(_results['mass']! * 4.0 * 6.67 * 2.0 / (9 * 3.09)) *
+    ds2s = ds2s.abs();
+    double thetaE = sqrt(_results['mass']! *
+        4.0 *
+        6.67 *
+        2.0 /
+        (9 * 3.09) *
         ds2s /
         DA_Mpc *
-        1e-19;
+        1e-19);
     thetaE = thetaE * 2.06e5;
     double DA_Gyr = (Tyr / _results['H0']!) * _DA(_az(_results['z']!));
     double kpc_DA = DA_Mpc / 206.264806;
